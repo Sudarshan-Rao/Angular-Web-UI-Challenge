@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getReadingList, removeFromReadingList } from '@tmo/books/data-access';
+import { getReadingList, removeFromReadingList, markAsFinished } from '@tmo/books/data-access';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -21,7 +21,12 @@ export class ReadingListComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store) {
+  }
+
+  markBookAsFinished(item) {
+    this.store.dispatch(markAsFinished({ item }));
+  }
 
   removeFromReadingList(item) {
     this.store.dispatch(removeFromReadingList({ item }));
