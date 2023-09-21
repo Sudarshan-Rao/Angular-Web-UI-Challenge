@@ -11,6 +11,7 @@ import { BooksFeatureModule } from '@tmo/books/feature';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
       }
     ),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ name: 'tmo' })
+    environment.production ? [] : StoreDevtoolsModule.instrument({ name: 'tmo' })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@
           <button
             data-testing="toggle-reading-list"
             mat-button
+            aria-label="Toggle reading list"
             (click)="drawer.toggle()"
           >
             Reading List
@@ -20,16 +21,19 @@
     </main>
   </mat-drawer-content>
   <mat-drawer #drawer mode="over" position="end">
-    <div class="reading-list-container" data-testing="reading-list-container">
+    <section class="reading-list-container" data-testing="reading-list-container">
       <h2>
         My Reading List
-        <button mat-icon-button (click)="drawer.close()">
+        <button 
+        mat-icon-button
+        aria-label="Close reading list" 
+        (click)="drawer.close()">
           <mat-icon>close</mat-icon>
         </button>
       </h2>
-      <div class="reading-list-content">
+      <article class="reading-list-content">
         <tmo-reading-list></tmo-reading-list>
-      </div>
-    </div>
+      </article>
+    </section>
   </mat-drawer>
 </mat-drawer-container>

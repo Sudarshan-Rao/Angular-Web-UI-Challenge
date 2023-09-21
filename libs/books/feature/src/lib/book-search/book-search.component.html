@@ -7,7 +7,7 @@
       placeholder="Search for books to add to your reading list"
       formControlName="term"
     />
-    <button mat-icon-button matSuffix>
+    <button mat-icon-button matSuffix aria-label="Search for books">
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
@@ -15,29 +15,30 @@
 
 <ng-container *ngIf="searchTerm; else empty">
   <div class="book-grid">
-    <div class="book" data-testing="book-item" *ngFor="let b of books">
+    <div class="book" data-testing="book-item" *ngFor="let b of books$ | async">
       <div class="book--title">
         {{ b.title }}
       </div>
       <div class="book--content">
         <div class="book--content--cover">
-          <img src="{{ b.coverUrl }}" />
+          <img alt= "{{ b.title + ' cover image' }}" [src]="b.coverUrl" />
         </div>
         <div class="book--content--info">
           <div><strong>Author:</strong> {{ b.authors.join(',') }}</div>
           <div><strong>Publisher:</strong> {{ b.publisher }}</div>
           <div>
-            <strong>Published:</strong> {{ formatDate(b.publishedDate) }}
+            <strong>Published:</strong> {{ b.publishedDate | date: 'MM/dd/yyyy' }}
           </div>
-          <p [innerHTML]="b.description"></p>
+          <p>{{ b.description }}</p>
           <div>
             <button
               mat-flat-button
               color="primary"
+              aria-label="Add {{ b.title }} to reading list"
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
             >
-              Want to Read
+              {{ b.isAdded ? 'Added' : 'Add to Reading List' }}
             </button>
           </div>
         </div>
@@ -46,7 +47,7 @@
   </div>
 </ng-container>
 <ng-template #empty>
-  <div class="empty">
+  <div class="empty darkTheme">
     <p>
       Try searching for a topic, for example "<a (click)="searchExample()"
         >JavaScript</a
