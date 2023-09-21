@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
 import { environment } from '../environments/environment';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { environment } from '../environments/environment';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
+    MatSnackBarModule,
     BooksFeatureModule,
     StoreModule.forRoot(
       {},
