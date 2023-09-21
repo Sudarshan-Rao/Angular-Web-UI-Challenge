@@ -8,7 +8,7 @@ export const loadReadingListSuccess = createAction(
   props<{ list: ReadingListItem[] }>()
 );
 export const loadReadingListError = createAction(
-  '[Reading List API] Load list error',
+  '[Reading List API] Load list error: Failed to load list',
   props<{ error: string }>()
 );
 
@@ -18,7 +18,7 @@ export const addToReadingList = createAction(
 );
 
 export const failedAddToReadingList = createAction(
-  '[Reading List API] Failed add to list',
+  '[Reading List API] Add to list failed',
   props<{ book: Book }>()
 );
 
