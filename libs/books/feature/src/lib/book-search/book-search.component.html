@@ -34,7 +34,7 @@
             <button
               mat-flat-button
               color="primary"
-              aria-label="Add {{ b.title }} to reading list"
+              [attr.aria-label]="'Add ' + b.title + ' to reading list'"
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
             >

@@ -28,18 +28,31 @@ describe('BooksEffects', () => {
   });
 
   describe('loadBooks$', () => {
-    it('should work', done => {
+    it('should work with a non-empty search term', (done) => {
       actions = new ReplaySubject();
-      actions.next(BooksActions.searchBooks({ term: '' }));
+      actions.next(BooksActions.searchBooks({ term: 'non-empty-term' }));
 
-      effects.searchBooks$.subscribe(action => {
+      effects.searchBooks$.subscribe((action) => {
         expect(action).toEqual(
           BooksActions.searchBooksSuccess({ books: [createBook('A')] })
         );
         done();
       });
 
-      httpMock.expectOne('/api/books/search?q=').flush([createBook('A')]);
+      httpMock
+        .expectOne('/api/books/search?q=non-empty-term')
+        .flush([createBook('A')]);
+    });
+    it('should work with an empty search term', (done) => {
+      actions = new ReplaySubject();
+      actions.next(BooksActions.searchBooks({ term: '' }));
+
+      effects.searchBooks$.subscribe((action) => {
+        expect(action).toEqual(
+          BooksActions.searchBooksSuccess({ books: [] })
+        );
+        done();
+      });
     });
   });
 });
