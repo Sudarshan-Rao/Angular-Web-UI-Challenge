@@ -38,7 +38,7 @@
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
             >
-              {{ b.isAdded ? 'Added' : 'Add to Reading List' }}
+              {{ b.isAdded ? b.finished ? 'Finished' : 'Added' : 'Add to reading list' }}
             </button>
           </div>
         </div>
